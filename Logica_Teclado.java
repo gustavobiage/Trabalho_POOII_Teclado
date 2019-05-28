@@ -66,12 +66,24 @@ public class Logica_Teclado extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        JButton botao = checaBotao((int)e.getKeyChar());
+        char c = frame.pegarLetra();
+        JTextArea textArea = frame.getTextArea();
+        if(botao != null && botao.getText().equals("Backspace")) {
+            textArea.setText(textArea.getText().substring(0, textArea.getText().length() - 1));
+        } else if(botao.getText().equals(c + "")) {
+            textArea.setText(textArea.getText() + c);
+            botao.setBackground(Color.GREEN);
+        } else if (botao != null) {
+            textArea.setText(textArea.getText() + c);
+            botao.setBackground(Color.RED);
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        JButton botao = checaBotao((int)e.getKeyChar());
+        if(botao != null) botao.setBackground(corpadrao);
     }
 
     @Override
